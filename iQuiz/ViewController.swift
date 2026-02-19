@@ -2,18 +2,21 @@
 //  ViewController.swift
 //  iQuiz
 //
-//  Created by Meixuan Wang on 2/16/2026.
+//  Created by Meixuan Wang on 2/19/2026.
 //
 
 import UIKit
 
 class ViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK: - Properties
     let toolbar = UIToolbar()
     let quizzes = QuizData.sampleQuizzes
     
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -21,6 +24,7 @@ class ViewController: UIViewController {
         setupToolbar()
     }
     
+    // MARK: - Setup Methods
     private func setupUI() {
         view.backgroundColor = .white
         title = "iQuiz"
@@ -29,7 +33,6 @@ class ViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-
     }
     
     private func setupToolbar() {
@@ -40,8 +43,10 @@ class ViewController: UIViewController {
             action: #selector(settingsButtonTapped)
         )
         
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
         toolbar.translatesAutoresizingMaskIntoConstraints = false
-        toolbar.items = [settingsButton]
+        toolbar.items = [flexibleSpace, settingsButton, flexibleSpace]
         toolbar.sizeToFit()
         
         view.addSubview(toolbar)
@@ -56,6 +61,7 @@ class ViewController: UIViewController {
         tableView.scrollIndicatorInsets = tableView.contentInset
     }
     
+    // MARK: - Actions
     @objc func settingsButtonTapped() {
         let alertController = UIAlertController(
             title: "Settings",
@@ -68,8 +74,19 @@ class ViewController: UIViewController {
         
         present(alertController, animated: true)
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "StartQuiz",
+           let questionVC = segue.destination as? QuestionViewController,
+           let selectedQuiz = sender as? Quiz {
+            questionVC.quiz = selectedQuiz
+            questionVC.questions = selectedQuiz.questions
+        }
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -77,8 +94,7 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuizCell",
-                                                       for: indexPath) as? QuizTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "QuizCell", for: indexPath) as? QuizTableViewCell else {
             return UITableViewCell()
         }
         
@@ -89,6 +105,7 @@ extension ViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -97,5 +114,8 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let selectedQuiz = quizzes[indexPath.row]
+        performSegue(withIdentifier: "StartQuiz", sender: selectedQuiz)
     }
 }

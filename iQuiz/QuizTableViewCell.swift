@@ -2,7 +2,7 @@
 //  QuizTableViewCell.swift
 //  iQuiz
 //
-//  Created by Meixuan Wang on 2/16/2026.
+//  Created by Meixuan Wang on 2/22/2026.
 //
 
 import UIKit
@@ -12,7 +12,6 @@ class QuizTableViewCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-
     
     override func awakeFromNib() {
         super.awakeFromNib()

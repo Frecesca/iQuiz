@@ -149,10 +149,12 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gVH-bK-JMV"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Submit Answer">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Submit Answer"/>
+                                <connections>
+                                    <action selector="submitTapped" destination="tu5-cJ-Aju" eventType="touchUpInside" id="JTx-S9-B5E"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7UO-vJ-EKR"/>
@@ -248,7 +250,7 @@
                                     <fontDescription key="titleFontDescription" type="boldSystem" pointSize="17"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <action selector="nextTapped:" destination="0uW-zS-BYr" eventType="touchUpInside" id="OsZ-Q2-Mb2"/>
+                                    <action selector="nextTapped:" destination="0uW-zS-BYr" eventType="touchUpInside" id="8rj-Y6-5oS"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -274,7 +276,6 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="P6J-Hk-zwe"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="nextButton" destination="JOf-Ti-S0x" id="2GE-Xn-W9y"/>
                         <outlet property="questionLabel" destination="LYB-9O-q7s" id="pHh-B2-zSL"/>
                         <outlet property="resultLabel" destination="ouY-Om-JcV" id="ojL-4F-zbX"/>
                         <outlet property="tableView" destination="kop-ro-fZL" id="JId-Vd-TAz"/>
@@ -318,13 +319,11 @@
                                     <constraint firstAttribute="height" constant="50" id="r3c-q1-vUH"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="rhj-9u-qAJ"/>
                                 </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="DONE">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="20"/>
-                                </buttonConfiguration>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="DONE"/>
                                 <connections>
-                                    <action selector="Action:" destination="4fc-D8-aap" eventType="touchUpInside" id="QVj-Lw-Uta"/>
-                                    <action selector="Action:" destination="eXO-2O-rNN" eventType="touchUpInside" id="uO8-T5-yPr"/>
+                                    <action selector="doneTapped:" destination="eXO-2O-rNN" eventType="touchUpInside" id="Spc-Mi-vDq"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -345,14 +344,12 @@
                         <barButtonItem key="backBarButtonItem" title="Back" id="yM6-Aw-fzW"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="doneButton" destination="HqJ-e6-pWk" id="eBW-qg-KZT"/>
-                        <outlet property="nextButton" destination="HqJ-e6-pWk" id="eVt-jw-VSo"/>
+                        <outlet property="doneButton" destination="HqJ-e6-pWk" id="q4g-pa-xC6"/>
                         <outlet property="resultLabel" destination="Muh-tx-bp4" id="kxU-6c-QVZ"/>
                         <outlet property="scoreLabel" destination="eJh-hM-HrM" id="1fo-BO-c7v"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a5b-hl-gXG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="4fc-D8-aap" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1122.9007633587785" y="1469.7183098591549"/>
         </scene>

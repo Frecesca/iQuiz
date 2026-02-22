@@ -20,7 +20,7 @@ struct Question {
     let correctAnswerIndex: Int
 }
 
-// Test data
+// Test data with different questions
 struct QuizData {
     static let sampleQuizzes = [
         Quiz(
@@ -42,6 +42,11 @@ struct QuizData {
                     text: "What is 10 ÷ 2?",
                     answers: ["3", "4", "5", "6"],
                     correctAnswerIndex: 2
+                ),
+                Question(
+                    text: "What is 7 - 4?",
+                    answers: ["2", "3", "4", "5"],
+                    correctAnswerIndex: 1
                 )
             ]
         ),
@@ -59,6 +64,11 @@ struct QuizData {
                     text: "What is Captain America's shield made of?",
                     answers: ["Steel", "Vibranium", "Adamantium", "Titanium"],
                     correctAnswerIndex: 1
+                ),
+                Question(
+                    text: "Who is the God of Thunder?",
+                    answers: ["Loki", "Odin", "Thor", "Heimdall"],
+                    correctAnswerIndex: 2
                 )
             ]
         ),
@@ -75,6 +85,11 @@ struct QuizData {
                 Question(
                     text: "What planet is known as the Red Planet?",
                     answers: ["Venus", "Jupiter", "Mars", "Saturn"],
+                    correctAnswerIndex: 2
+                ),
+                Question(
+                    text: "What is the hardest natural substance on Earth?",
+                    answers: ["Gold", "Iron", "Diamond", "Platinum"],
                     correctAnswerIndex: 2
                 )
             ]

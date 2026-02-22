@@ -12,10 +12,7 @@ class FinishedViewController: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet weak var resultLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var doneButton: UIButton!
-    
-    @IBAction func Action(_ sender: UIButton) {
-    }
+    @IBOutlet weak var doneButton: UIButton!  
     
     // MARK: - Properties
     var score: Int = 0
@@ -27,19 +24,22 @@ class FinishedViewController: UIViewController {
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("🟢 FinishedViewController loaded")
+        print("📊 Score: \(score)/\(totalQuestions)")
+        
         setupUI()
         setupSwipeGestures()
     }
     
     // MARK: - Setup Methods
     private func setupUI() {
-        // Set navigation title
         title = "Quiz Complete"
         
-        // Configure button style
+        // Configure done button
         doneButton.layer.cornerRadius = 8
         doneButton.backgroundColor = .systemBlue
         doneButton.setTitleColor(.white, for: .normal)
+        doneButton.setTitle("DONE", for: .normal)
         doneButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         
         // Calculate percentage
@@ -63,7 +63,6 @@ class FinishedViewController: UIViewController {
             resultLabel.textColor = .systemRed
         }
         
-        // Configure result label style
         resultLabel.font = UIFont.boldSystemFont(ofSize: 36)
         resultLabel.textAlignment = .center
         resultLabel.numberOfLines = 1
@@ -81,42 +80,11 @@ class FinishedViewController: UIViewController {
         let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipeLeft))
         swipeLeft.direction = .left
         view.addGestureRecognizer(swipeLeft)
-        
-        // Add hint label for swipe (Extra Credit)
-        addSwipeHint()
-    }
-    
-    private func addSwipeHint() {
-        let hintLabel = UILabel()
-        hintLabel.text = "⬅️ Swipe left to return to quiz list"
-        hintLabel.font = UIFont.systemFont(ofSize: 14)
-        hintLabel.textColor = .gray
-        hintLabel.textAlignment = .center
-        hintLabel.backgroundColor = UIColor.systemGray6
-        hintLabel.layer.cornerRadius = 10
-        hintLabel.layer.masksToBounds = true
-        hintLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        view.addSubview(hintLabel)
-        
-        NSLayoutConstraint.activate([
-            hintLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            hintLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            hintLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            hintLabel.heightAnchor.constraint(equalToConstant: 40)
-        ])
-        
-        // Auto hide after 3 seconds (optional)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            UIView.animate(withDuration: 0.5) {
-                hintLabel.alpha = 0
-            }
-        }
     }
     
     // MARK: - Swipe Gesture Handlers
     @objc func handleSwipeLeft() {
-        print("Swipe left detected - Return to quiz list")
+        print("👈 Swipe left detected - Return to quiz list")
         returnToQuizList()
     }
     
@@ -126,7 +94,7 @@ class FinishedViewController: UIViewController {
     
     // MARK: - Actions
     @IBAction func doneTapped(_ sender: UIButton) {
-        print("Done button tapped")
+        print("✅ Done button tapped")
         returnToQuizList()
     }
 }

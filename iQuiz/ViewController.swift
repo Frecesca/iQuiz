@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  iQuiz
 //
-//  Created by Meixuan Wang on 2/19/2026.
+//  Created by Meixuan Wang on 2/22/2026.
 //
 
 import UIKit
@@ -77,11 +77,19 @@ class ViewController: UIViewController {
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("🔄 prepareForSegue: \(segue.identifier ?? "nil")")
+        
         if segue.identifier == "StartQuiz",
            let questionVC = segue.destination as? QuestionViewController,
            let selectedQuiz = sender as? Quiz {
+            
+            print("📤 Passing quiz to QuestionViewController: \(selectedQuiz.title)")
+            print("📊 Number of questions: \(selectedQuiz.questions.count)")
+            
+            // ✅ 只设置 quiz 属性，QuestionViewController 会通过 quiz.questions 获取问题
             questionVC.quiz = selectedQuiz
-            questionVC.questions = selectedQuiz.questions
+            // ❌ 不要设置 questionVC.questions，因为这个属性不存在
+            // questionVC.questions = selectedQuiz.questions  // 删除这行！
         }
     }
 }
@@ -116,6 +124,9 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let selectedQuiz = quizzes[indexPath.row]
+        print("👉 Selected quiz: \(selectedQuiz.title)")
+        print("📊 Number of questions: \(selectedQuiz.questions.count)")
+        
         performSegue(withIdentifier: "StartQuiz", sender: selectedQuiz)
     }
 }
